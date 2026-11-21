@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard | SecureAuth{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-wrapper">
+
+    <div class="dashboard-card">
+
+        <div class="success-icon">✓</div>
+
+        <h1>Welcome, {{ user.username }}!</h1>
+
+        <p class="subtitle">
+            You are successfully authenticated.
+        </p>
+
+        <div class="security-status">
+            <div class="status-dot"></div>
+            <span>Session Active &amp; Protected</span>
+        </div>
+
+        <div class="user-details">
+            <div class="detail-row">
+                <span>Username</span>
+                <strong>{{ user.username }}</strong>
+            </div>
+
+            <div class="detail-row">
+                <span>Email</span>
+                <strong>{{ user.email }}</strong>
+            </div>
+
+            <div class="detail-row">
+                <span>Account ID</span>
+                <strong>#{{ user.id }}</strong>
+            </div>
+
+            <div class="detail-row">
+                <span>Password Storage</span>
+                <strong class="encrypted">bcrypt Hash</strong>
+            </div>
+        </div>
+
+        <form method="POST" action="{{ url_for('logout') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button type="submit" class="logout-button">
+                Logout Securely
+            </button>
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
